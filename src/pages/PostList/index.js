@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getComments, getPosts, getUsers } from '../../api';
 import ErrorMessage from '../../components/ErrorMessage';
 import PostItem from '../../components/PostItem';
+import Spinner from '../../components/Spinner';
 
 const PostList = ({ propMessage }) => {
   const [comments, setComments] = useState([]);
@@ -60,7 +61,7 @@ const PostList = ({ propMessage }) => {
   };
 
   if (error) return <ErrorMessage message={error} propMessage={propMessage} />;
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Spinner propMessage={propMessage} />;
 
   return (
     <div className="container">

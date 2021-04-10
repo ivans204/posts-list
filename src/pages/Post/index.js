@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { getCommentsByPostId, getPostById, getUserById } from '../../api';
 import ErrorMessage from '../../components/ErrorMessage';
 import PostItem from '../../components/PostItem';
+import Spinner from '../../components/Spinner';
 
 const PostPage = ({ propMessage }) => {
   const { id } = useParams();
@@ -58,7 +59,7 @@ const PostPage = ({ propMessage }) => {
   };
 
   if (error) return <ErrorMessage message={error} propMessage={propMessage} />;
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Spinner propMessage={propMessage} />;
 
   return (
     <div className="container">
