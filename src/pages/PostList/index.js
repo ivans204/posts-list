@@ -41,9 +41,9 @@ const PostList = ({ propMessage }) => {
             <PostItem
               author={author}
               comments={postComments}
-              href={`/post/${post.id}`}
               key={post.id}
               post={post}
+              propMessage={propMessage}
             />
           );
         })}

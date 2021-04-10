@@ -1,7 +1,13 @@
 import { PropTypes } from 'prop-types';
+import { useEffect } from 'react';
 
-const PostItem = ({ author, comments, post }) => {
+const PostItem = ({ author, comments, post, propMessage }) => {
   const { body, id, title } = post;
+
+  const componentName = 'PostItem';
+
+  useEffect(() => console.log(`${propMessage} ${componentName}`), []);
+
   return (
     <div className="post-wrap p-4 mb-4">
       <h2>{title}</h2>
