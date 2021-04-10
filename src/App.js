@@ -19,6 +19,7 @@ function App() {
             path="/posts"
             render={() => <PostList propMessage={propMessage} />}
           />
+          <Route exact path="/" render={() => <Redirect to="/posts" />} />
         </Switch>
       </Router>
     </div>
