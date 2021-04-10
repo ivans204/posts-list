@@ -1,7 +1,8 @@
 import { PropTypes } from 'prop-types';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-const PostItem = ({ author, comments, post, propMessage }) => {
+const PostItem = ({ author, comments, href, post, propMessage }) => {
   const { body, id, title } = post;
 
   const componentName = 'PostItem';
@@ -10,7 +11,9 @@ const PostItem = ({ author, comments, post, propMessage }) => {
 
   return (
     <div className="post-wrap p-4 mb-4">
-      <h2>{title}</h2>
+      <Link to={href}>
+        <h2>{title}</h2>
+      </Link>
       <p className="my-4">{body}</p>
       <p>Comments:</p>
       <ul>
