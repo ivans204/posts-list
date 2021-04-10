@@ -63,7 +63,7 @@ const PostList = ({ propMessage }) => {
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
-    <div>
+    <div className="container">
       {users.length &&
         posts.map((post) => {
           const postComments = comments.filter(
