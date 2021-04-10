@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { getComments, getPosts, getUsers } from '../../api';
+import ErrorMessage from '../../components/ErrorMessage';
 import PostItem from '../../components/PostItem';
 
 const PostList = ({ propMessage }) => {
@@ -46,7 +47,7 @@ const PostList = ({ propMessage }) => {
       : setError('Something went wrong');
   };
 
-  if (error) return <h2 className="text-center">{error.message}</h2>;
+  if (error) return <ErrorMessage message={error} propMessage={propMessage} />;
 
   return (
     <div>
