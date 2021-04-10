@@ -9,3 +9,7 @@ export const getPosts = async () => {
 export const getComments = async () => {
   return await axios.get(`${baseUrl}/comments`);
 };
+
+export const getUsers = async () => {
+  return await axios.get(`${baseUrl}/users`);
+};
