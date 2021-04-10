@@ -1,6 +1,5 @@
 import {
   BrowserRouter as Router,
-  Link,
   Redirect,
   Route,
   Switch,
@@ -8,6 +7,7 @@ import {
 
 import PostList from './pages/PostList';
 import PostPage from './pages/Post';
+import PostsRouteButton from './components/PostsRouteButton';
 
 const propMessage = 'Hello from';
 
@@ -30,11 +30,10 @@ function App() {
             render={() => (
               <div className="container">
                 <h1 className="text-center">404</h1>
-                <Link to="/posts">
-                  <button className="d-block m-auto btn btn-primary">
-                    Go To Posts
-                  </button>
-                </Link>
+                <PostsRouteButton
+                  btnText="Go to Posts"
+                  propMessage={propMessage}
+                />
               </div>
             )}
           />

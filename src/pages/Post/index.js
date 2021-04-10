@@ -1,10 +1,11 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { getCommentsByPostId, getPostById, getUserById } from '../../api';
 import ErrorMessage from '../../components/ErrorMessage';
 import PostItem from '../../components/PostItem';
+import PostsRouteButton from '../../components/PostsRouteButton';
 import Spinner from '../../components/Spinner';
 
 const PostPage = ({ propMessage }) => {
@@ -72,9 +73,7 @@ const PostPage = ({ propMessage }) => {
           propMessage={propMessage}
         />
       )}
-      <Link to="/posts">
-        <button className="btn btn-primary d-block m-auto">All posts</button>
-      </Link>
+      <PostsRouteButton btnText="All posts" propMessage={propMessage} />
     </div>
   );
 };
