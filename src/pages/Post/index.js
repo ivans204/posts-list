@@ -58,19 +58,22 @@ const PostPage = ({ propMessage }) => {
       });
   };
 
-  if (error) return <ErrorMessage message={error} propMessage={propMessage} />;
   if (isLoading) return <Spinner propMessage={propMessage} />;
 
   return (
     <div className="container">
-      <PostItem
-        author={user}
-        comments={comments}
-        post={post}
-        propMessage={propMessage}
-      />
+      {error ? (
+        <ErrorMessage message={error} propMessage={propMessage} />
+      ) : (
+        <PostItem
+          author={user}
+          comments={comments}
+          post={post}
+          propMessage={propMessage}
+        />
+      )}
       <Link to="/posts">
-        <button className="btn btn-primary">All posts</button>
+        <button className="btn btn-primary d-block m-auto">All posts</button>
       </Link>
     </div>
   );
