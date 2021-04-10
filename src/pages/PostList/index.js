@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { getComments, getPosts, getUsers } from '../../api';
 import PostItem from '../../components/PostItem';
 
-const PostList = () => {
+const PostList = ({ propMessage }) => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [users, setUsers] = useState([]);
+
+  const componentName = 'PostList';
+
+  useEffect(() => console.log(`${propMessage} ${componentName}`), []);
 
   useEffect(() => {
     getPosts().then((posts) => {
@@ -44,6 +49,10 @@ const PostList = () => {
         })}
     </div>
   );
+};
+
+PostList.propTypes = {
+  propMessage: PropTypes.string,
 };
 
 export default PostList;
