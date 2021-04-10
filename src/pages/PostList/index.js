@@ -10,18 +10,24 @@ const PostList = ({ propMessage }) => {
   const [error, setError] = useState('');
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const componentName = 'PostList';
 
   useEffect(() => console.log(`${propMessage} ${componentName}`), []);
 
   useEffect(() => {
+    setIsLoading(true);
+
     getPosts()
       .then((posts) => {
         setPosts(posts.data);
       })
       .catch((err) => {
         handleRequestError(err, 'Cannot fetch posts');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
 
     getComments()
@@ -30,6 +36,9 @@ const PostList = ({ propMessage }) => {
       })
       .catch((err) => {
         handleRequestError(err, 'Cannot fetch posts');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
 
     getUsers()
@@ -38,6 +47,9 @@ const PostList = ({ propMessage }) => {
       })
       .catch((err) => {
         handleRequestError(err, 'Cannot fetch posts');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -48,6 +60,7 @@ const PostList = ({ propMessage }) => {
   };
 
   if (error) return <ErrorMessage message={error} propMessage={propMessage} />;
+  if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div>
