@@ -20,6 +20,19 @@ function App() {
             render={() => <PostList propMessage={propMessage} />}
           />
           <Route exact path="/" render={() => <Redirect to="/posts" />} />
+          <Route
+            path="*"
+            render={() => (
+              <div className="container">
+                <h1 className="text-center">404</h1>
+                <Link to="/posts">
+                  <button className="d-block m-auto btn btn-primary">
+                    Go To Posts
+                  </button>
+                </Link>
+              </div>
+            )}
+          />
         </Switch>
       </Router>
     </div>
