@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { getPosts, getComments } from '../../api';
+import { getComments, getPosts, getUsers } from '../../api';
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     getPosts().then((posts) => {
@@ -13,6 +14,10 @@ const PostList = () => {
 
     getComments().then((comments) => {
       setComments(comments.data);
+    });
+
+    getUsers().then((users) => {
+      setUsers(users.data);
     });
   }, []);
 
@@ -33,6 +38,14 @@ const PostList = () => {
                   }
                 })}
               </ul>
+              <p>
+                Author:{' '}
+                {users.map((user) => {
+                  if (user.id === post.userId) {
+                    return <span key={post.id}>{user.username}</span>;
+                  }
+                })}
+              </p>
               <hr />
             </div>
           );
