@@ -9,9 +9,9 @@ const PostItem = ({ author, comments, post }) => {
       <p>Comments:</p>
       <ul>
         {comments.map((comment) => {
-          if (comment.postId === id) {
-            return <li key={comment.id}>{comment.body}</li>;
-          }
+          return comment.postId === id ? (
+            <li key={comment.id}>{comment.body}</li>
+          ) : null;
         })}
       </ul>
       <p className="mb-0 pt-3 border-top">
