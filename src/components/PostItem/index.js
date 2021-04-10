@@ -33,6 +33,7 @@ const PostItem = ({ author, comments, href, post, propMessage }) => {
 PostItem.propType = {
   author: PropTypes.object,
   comments: PropTypes.array,
+  href: PropTypes.string,
   post: PropTypes.object,
   propMessage: PropTypes.string,
 };
