@@ -9,11 +9,20 @@ const PostItem = ({ author, comments, href, post, propMessage }) => {
 
   useEffect(() => console.log(`${propMessage} ${componentName}`), []);
 
+  const Title = () => {
+    if (href) {
+      return (
+        <Link to={href}>
+          <h2>{title}</h2>
+        </Link>
+      );
+    }
+    return <h2>{title}</h2>;
+  };
+
   return (
     <div className="post-wrap p-4 mb-4">
-      <Link to={href}>
-        <h2>{title}</h2>
-      </Link>
+      <Title />
       <p className="my-4">{body}</p>
       <p>Comments:</p>
       <ul>
