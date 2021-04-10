@@ -5,8 +5,9 @@ import { getComments, getPosts, getUsers } from '../../api';
 import PostItem from '../../components/PostItem';
 
 const PostList = ({ propMessage }) => {
-  const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
+  const [error, setError] = useState('');
+  const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
 
   const componentName = 'PostList';
@@ -14,23 +15,42 @@ const PostList = ({ propMessage }) => {
   useEffect(() => console.log(`${propMessage} ${componentName}`), []);
 
   useEffect(() => {
-    getPosts().then((posts) => {
-      setPosts(posts.data);
-    });
+    getPosts()
+      .then((posts) => {
+        setPosts(posts.data);
+      })
+      .catch((err) => {
+        handleRequestError(err, 'Cannot fetch posts');
+      });
 
-    getComments().then((comments) => {
-      setComments(comments.data);
-    });
+    getComments()
+      .then((comments) => {
+        setComments(comments.data);
+      })
+      .catch((err) => {
+        handleRequestError(err, 'Cannot fetch posts');
+      });
 
-    getUsers().then((users) => {
-      setUsers(users.data);
-    });
+    getUsers()
+      .then((users) => {
+        setUsers(users.data);
+      })
+      .catch((err) => {
+        handleRequestError(err, 'Cannot fetch posts');
+      });
   }, []);
+
+  const handleRequestError = (err, message) => {
+    err.response.status === 404
+      ? setError(message)
+      : setError('Something went wrong');
+  };
+
+  if (error) return <h2 className="text-center">{error.message}</h2>;
 
   return (
     <div>
       {users.length &&
-        // eslint-disable-next-line
         posts.map((post) => {
           const postComments = comments.filter(
             (comment) => comment.postId === post.id
