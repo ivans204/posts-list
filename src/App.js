@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import PostList from './pages/PostList';
+import PostPage from './pages/Post';
 
 const propMessage = 'Hello from';
 
@@ -15,6 +16,10 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+          <Route
+            path="/post/:id"
+            render={() => <PostPage propMessage={propMessage} />}
+          />
           <Route
             path="/posts"
             render={() => <PostList propMessage={propMessage} />}
