@@ -1,4 +1,4 @@
-import React from 'react';
+import { PropTypes } from 'prop-types';
 
 const PostItem = ({ author, comments, post }) => {
   const { body, id, title } = post;
@@ -19,6 +19,13 @@ const PostItem = ({ author, comments, post }) => {
       </p>
     </div>
   );
+};
+
+PostItem.propType = {
+  author: PropTypes.object,
+  comments: PropTypes.array,
+  post: PropTypes.object,
+  propMessage: PropTypes.string,
 };
 
 export default PostItem;
