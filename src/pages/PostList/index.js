@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { getComments, getPosts, getUsers } from '../../api';
+import PostItem from '../../components/PostItem';
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -23,31 +24,22 @@ const PostList = () => {
 
   return (
     <div>
-      {posts &&
+      {users.length &&
         // eslint-disable-next-line
         posts.map((post) => {
+          const postComments = comments.filter(
+            (comment) => comment.postId === post.id
+          );
+          const author = users.find((user) => user.id === post.userId);
+
           return (
-            <div key={post.id}>
-              <p>title: {post.title}</p>
-              <p>body: {post.body}</p>
-              <p>Comments:</p>
-              <ul>
-                {comments.map((comment) => {
-                  if (comment.postId === post.id) {
-                    return <li key={comment.id}>{comment.body}</li>;
-                  }
-                })}
-              </ul>
-              <p>
-                Author:{' '}
-                {users.map((user) => {
-                  if (user.id === post.userId) {
-                    return <span key={post.id}>{user.username}</span>;
-                  }
-                })}
-              </p>
-              <hr />
-            </div>
+            <PostItem
+              author={author}
+              comments={postComments}
+              href={`/post/${post.id}`}
+              key={post.id}
+              post={post}
+            />
           );
         })}
     </div>
