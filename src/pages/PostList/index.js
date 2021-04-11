@@ -81,6 +81,7 @@ const PostList = ({ propMessage }) => {
   return (
     <div className="container">
       <input
+        className="form-control mt-4"
         placeholder="Search the list by author..."
         onChange={(e) => setSearchValue(e.target.value.trim())}
       />
