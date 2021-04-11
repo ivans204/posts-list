@@ -12,6 +12,7 @@ const PostList = ({ propMessage }) => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   const componentName = 'PostList';
 
@@ -60,13 +61,34 @@ const PostList = ({ propMessage }) => {
       : setError('Something went wrong');
   };
 
+  const filteredUsers = users.filter((user) =>
+    user.username.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
+  const filteredData = posts.filter((post) => {
+    if (searchValue && filteredUsers) {
+      return filteredUsers.find((user) => {
+        if (post.userId === user.id) return post;
+      });
+    } else {
+      return post;
+    }
+  });
+
   if (error) return <ErrorMessage message={error} propMessage={propMessage} />;
   if (isLoading) return <Spinner propMessage={propMessage} />;
 
   return (
     <div className="container">
-      {users.length &&
-        posts.map((post) => {
+      <input
+        placeholder="Search the list by author..."
+        onChange={(e) => setSearchValue(e.target.value.trim())}
+      />
+      {filteredData && filteredData.length === 0 ? (
+        <h1>No posts available.</h1>
+      ) : (
+        users.length &&
+        filteredData.map((post) => {
           const postComments = comments.filter(
             (comment) => comment.postId === post.id
           );
@@ -82,7 +104,8 @@ const PostList = ({ propMessage }) => {
               propMessage={propMessage}
             />
           );
-        })}
+        })
+      )}
     </div>
   );
 };
